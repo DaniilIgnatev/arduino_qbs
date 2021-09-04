@@ -1,0 +1,3 @@
+https://www.youtube.com/watch?v=PXVyHI1P2ag
+https://bitbucket.org/sanjuchopracool/nrf24l01p_device/src/master/
+https://habr.com/ru/post/408261/
