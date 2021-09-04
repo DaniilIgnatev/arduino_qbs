@@ -21,13 +21,13 @@ Product {
     cpp.includePaths: [
         SKETCH_PATH,
         AVR_TOOLCHAIN_PATH,
-        ARDUINO_CORE_PATH,
-        ARDUINO_VARIANTS_PATH
+//        ARDUINO_CORE_PATH,
+//        ARDUINO_VARIANTS_PATH
     ]
 
     files: [
-        ARDUINO_CORE_PATH + "/*",
-        ARDUINO_VARIANTS_PATH + "/*",
+//        ARDUINO_CORE_PATH + "/*",
+//        ARDUINO_VARIANTS_PATH + "/*",
         SKETCH_PATH + "/*",
     ]
 
