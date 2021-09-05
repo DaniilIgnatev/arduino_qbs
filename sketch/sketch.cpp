@@ -5,25 +5,18 @@
  * Author : daniil
  */
 
-#include <avr/io.h>
+#include <Arduino.h>
 
 
-int main(void)
-{
-    DDRB = (uint8_t)0b11111111;
-    PORTB = (uint8_t)0b00000000;
+void setup(){
+    pinMode(LED_BUILTIN, OUTPUT);
 
-    ADMUX =  (uint8_t)0b11000101;
-    ADCSRA = (uint8_t)0b10000111;
-    ADCSRB = (uint8_t)0b00000000;
-    DIDR0 =  (uint8_t)0b00100000;
+}
 
-    ADCSRA |= (uint8_t)(1 << ADEN);
 
-    while (1)
-    {
-        ADCSRA |= (uint8_t)(1 << ADSC);
-        while(ADCSRA & (uint8_t)(1 << ADSC));
-        PORTB = (uint8_t)ADCL;
-    }
+void loop(){
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(1000);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(1000);
 }

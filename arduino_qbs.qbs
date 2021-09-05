@@ -6,33 +6,30 @@ Product {
     type: ["application", "hex", "bin", "size"]
     Depends { name: "cpp" }
 
-
-    property string MCU: "atmega328"
     property string SKETCH_PATH: "sketch"
-    property string AVR_TOOLCHAIN_PATH: "C:/avr-gcc/avr/include"
-
-    property string ARDUINO_PATH: "C:/Users/daniil/Documents/Arduino"
+    property string ARDUINO_PATH: "/home/daniil/arduino"
+    property string AVR_TOOLCHAIN_PATH: ARDUINO_PATH + "/hardware/tools/avr/bin"
     property string ARDUINO_CORE_PATH: ARDUINO_PATH + "/hardware/arduino/avr/cores/arduino"
     property string ARDUINO_VARIANTS_PATH: ARDUINO_PATH + "/hardware/arduino/avr/variants/standard"
 
+    property string MCU: "atmega328"
     property string F_CPU: "16000000L"
-
 
     cpp.includePaths: [
         SKETCH_PATH,
         AVR_TOOLCHAIN_PATH,
-//        ARDUINO_CORE_PATH,
-//        ARDUINO_VARIANTS_PATH
+        ARDUINO_CORE_PATH,
+        ARDUINO_VARIANTS_PATH
     ]
 
     files: [
-//        ARDUINO_CORE_PATH + "/*",
-//        ARDUINO_VARIANTS_PATH + "/*",
+        ARDUINO_CORE_PATH + "/*",
+        ARDUINO_VARIANTS_PATH + "/*",
         SKETCH_PATH + "/*",
     ]
 
     cpp.defines:[
-        "F_CPU="+F_CPU,
+        "F_CPU=" + F_CPU,
     ]
 
     cpp.commonCompilerFlags : [
@@ -44,7 +41,7 @@ Product {
         "-fdata-sections",
         "-fno-exceptions",
         "-MMD",
-        "-DF_CPU="+F_CPU,
+        "-DF_CPU=" + F_CPU,
     ]
 
     cpp.linkerFlags : [
@@ -101,24 +98,6 @@ Product {
         Artifact {
             fileTags: ["bin"]
             filePath: FileInfo.baseName(input.filePath) + ".bin"
-        }
-    }
-
-    Rule {
-        id: size
-        inputs: ["application"]
-        alwaysRun: true
-        prepare: {
-            var sizePath = input.cpp.toolchainPrefix + "size"
-            var args = [input.filePath];
-            var cmd = new Command(sizePath, args);
-            cmd.description = "File size: " + FileInfo.fileName(input.filePath);
-            cmd.highlight = "linker";
-            return cmd;
-        }
-        Artifact {
-            fileTags: ["size"]
-            filePath: undefined
         }
     }
 }
